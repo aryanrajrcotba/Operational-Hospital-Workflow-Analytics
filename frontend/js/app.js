@@ -40,6 +40,8 @@
   const siteOpts = SITES.map((f) => ({ v: f, label: f, dot: true }));
   const sec = (no, title, lede) => `<div class="sec-head"><span class="no">${no}</span><h2>${title}</h2></div><p class="lede">${lede}</p>`;
   const tbl = (cols, rows) => table(cols, rows);
+  const fig = (src, title, meta = "", cls = "") => `<figure class="fig ${cls}"><img src="${src}" alt="${title}" loading="lazy"><figcaption><b>${title}</b>${meta ? `<span>${meta}</span>` : ""}</figcaption></figure>`;
+  window.UI = { card, wireTables, seg, sec, tbl, dot, col, siteOpts, $id, SITES, fig };
 
   // ================================================================ T1
   function viewT1() {
@@ -315,23 +317,29 @@
 
   // ================================================================ next
   function viewNext() {
+    const done = [["T1 · Understanding EHR", "Data layers, record anatomy, facilities, feature dictionary, workflow patterns."],
+      ["T2 · Preprocessing", "Standardization and data cleaning, with evidence and outputs."],
+      ["T3 · EHR preprocessing", "Redundant columns and records, explicit and hidden missing data, imputation benchmark."],
+      ["T4 · Image processing", "Enhancement, restoration, segmentation and compression, scored against ground truth."],
+      ["T5 · Image analysis", "SIFT keypoints, RANSAC registration and a CNN nodule classifier."],
+      ["T6 · Visualisation", "Interactive multi-planar viewer: windowing, colormaps, overlays, projections."]];
     return `<div class="hero"><div><h1>Coming next</h1><p>Topics are added one at a time. Each new topic is one Python module in <span class="mono">pipeline/</span> plus one view in this app, so nothing built so far needs to change.</p></div></div>
     <div class="grid g3">
-      <div class="card"><div class="tag" style="color:var(--good-ink);font-weight:600;font-size:12px">DONE</div><h3 style="margin-top:4px">T1 · Understanding EHR</h3><p class="sub">Data layers, record anatomy, facilities, feature dictionary, workflow patterns.</p></div>
-      <div class="card"><div class="tag" style="color:var(--good-ink);font-weight:600;font-size:12px">DONE</div><h3 style="margin-top:4px">T2 · Preprocessing</h3><p class="sub">Standardization and data cleaning, with evidence and outputs.</p></div>
-      <div class="card soon"><div class="tag" style="color:var(--muted);font-weight:600;font-size:12px">PLANNED</div><h3 style="margin-top:4px">T3 · Your next topic</h3><p class="sub">Send the topic name and it slots in here.</p></div>
+      ${done.map(([h, p]) => `<div class="card"><div class="tag" style="color:var(--good-ink);font-weight:600;font-size:12px">DONE</div><h3 style="margin-top:4px">${h}</h3><p class="sub">${p}</p></div>`).join("")}
+      <div class="card soon"><div class="tag" style="color:var(--muted);font-weight:600;font-size:12px">PLANNED</div><h3 style="margin-top:4px">T7 · Your next topic</h3><p class="sub">Send the topic name and it slots in here.</p></div>
     </div>
-    <div class="callout"><p><b>Ideas that fit the data</b> (only if you want them): feature engineering and selection, wait-time prediction with a time-based split, queue and capacity analysis by scanner load, and bottleneck detection by hour and exam type.</p></div>`;
+    <div class="callout"><p><b>Ideas that fit the data</b> (only if you want them): wait-time prediction with a time-based split, queue and capacity analysis by scanner load, bottleneck detection by hour and exam type, and running the T4–T5 methods on real DICOM studies instead of the phantom.</p></div>`;
   }
 
   // ================================================================ shell
+  // Topic files (t3.js ... t6.js) call App.add({ id, label, view, mount }) before App.start() runs.
   const TOPICS = [
     { id: "t1", label: "T1 · Understanding EHR", view: viewT1, mount: mountT1 },
     { id: "t2", label: "T2 · Preprocessing", view: viewT2, mount: mountT2 },
     { id: "next", label: "Coming next", view: viewNext, mount() {} },
   ];
-  let current = (location.hash || "#t1").slice(1);
-  if (!TOPICS.some((t) => t.id === current)) current = "t1";
+  window.App = { add(t) { TOPICS.splice(TOPICS.length - 1, 0, t); }, start() { boot(); } };
+  let current = "t1";
 
   function render() {
     const t = TOPICS.find((x) => x.id === current);
@@ -348,5 +356,9 @@
     try { localStorage.setItem("theme", document.documentElement.dataset.theme); } catch (e) {}
     render();
   };
-  render();
+  function boot() {
+    current = (location.hash || "#t1").slice(1);
+    if (!TOPICS.some((t) => t.id === current)) current = "t1";
+    render();
+  }
 })();

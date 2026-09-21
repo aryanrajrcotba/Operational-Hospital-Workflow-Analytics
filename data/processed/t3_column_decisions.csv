@@ -1,0 +1,321 @@
+facility,column,family,decision,stage,representative,reason,structural_missing_rows
+F1,sum_how_early_waiting,Queue state (patients waiting),kept,,,,0
+F1,avg_how_early_waiting,Queue state (patients waiting),kept,,,,9776
+F1,line_count0_strict,Queue state (patients waiting),kept,,,,0
+F1,sum_waits,Queue state (patients waiting),kept,,,,0
+F1,line_count0,Queue state (patients waiting),kept,,,,0
+F1,line_count1,Queue state (patients waiting),kept,,,,0
+F1,line_count2,Queue state (patients waiting),kept,,,,0
+F1,line_count3,Queue state (patients waiting),kept,,,,0
+F1,line_count4,Queue state (patients waiting),kept,,,,0
+F1,flow_count2,Flow & throughput,kept,,,,0
+F1,flow_count4,Flow & throughput,kept,,,,0
+F1,sch_flow_count2,Flow & throughput,kept,,,,0
+F1,sch_flow_count4,Flow & throughput,kept,,,,0
+F1,fut_flow_count2,Flow & throughput,kept,,,,0
+F1,fut_flow_count4,Flow & throughput,kept,,,,0
+F1,delay_count,Recent delay history,kept,,,,0
+F1,delay_count_last_hour,Recent delay history,kept,,,,0
+F1,day_min_wait,Recent delay history,kept,,,,0
+F1,day_max_wait,Recent delay history,kept,,,,4387
+F1,ahead_count,Queue state (patients waiting),dropped,collinear,arrival_hour,r = +0.966 with arrival_hour,0
+F1,thoracic_count,Exam mix (waiting),dropped,constant,,always 0 at this site (not applicable here),0
+F1,pediatric_count,Exam mix (waiting),dropped,constant,,always 0 at this site (not applicable here),0
+F1,neuro_count,Exam mix (waiting),dropped,constant,,always 0 at this site (not applicable here),0
+F1,abdominal_count,Exam mix (waiting),kept,,,,0
+F1,vascular_count,Exam mix (waiting),kept,,,,0
+F1,cardiac_count,Exam mix (waiting),dropped,constant,,always 0 at this site (not applicable here),0
+F1,msk_count,Exam mix (waiting),kept,,,,0
+F1,num_scanners_used_today,In-progress & capacity,kept,,,,0
+F1,sum_in_progress,In-progress & capacity,kept,,,,0
+F1,before_slot,Schedule context,kept,,,,0
+F1,after_slot,Schedule context,kept,,,,0
+F1,median5,Recent delay history,kept,,,,3912
+F1,most_recent1,Recent delay history,kept,,,,3912
+F1,most_recent2,Recent delay history,kept,,,,4928
+F1,most_recent3,Recent delay history,kept,,,,6083
+F1,most_recent4,Recent delay history,kept,,,,7138
+F1,most_recent5,Recent delay history,kept,,,,7949
+F1,start_hour,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F1,start_hour_sq,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F1,start_hour_cu,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F1,start_hour_4th,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F1,is_last,Schedule context,kept,,,,0
+F1,is_first,Schedule context,kept,,,,0
+F1,none_in_progress,In-progress & capacity,kept,,,,0
+F1,none_completed,Flow & throughput,kept,,,,0
+F1,none_in_line,Queue state (patients waiting),kept,,,,0
+F1,sum_wait_by_task_type_line,Queue state (patients waiting),dropped,collinear,line_count0,"r = +0.996 with line_count0, which tracks wait_min more closely",0
+F1,avg_wait_by_task_type_line,Queue state (patients waiting),dropped,collinear,none_in_line,"r = -0.987 with none_in_line, which tracks wait_min more closely",0
+F1,sum_time_to_complete_in_progress,In-progress & capacity,kept,,,,0
+F1,delayed_in_line,Queue state (patients waiting),kept,,,,0
+F1,sum_delay_waiting_by_exam_code,Queue state (patients waiting),dropped,collinear,line_count0,"r = +0.994 with line_count0, which tracks wait_min more closely",0
+F1,sum_delay_waiting_in_line,Queue state (patients waiting),kept,,,,0
+F1,sum_delay_in_progress,In-progress & capacity,kept,,,,0
+F1,expected_delay_next_exam,Recent delay history,kept,,,,0
+F1,avg_age_people_waiting,Queue state (patients waiting),kept,,,,9776
+F1,in_progress_size,In-progress & capacity,kept,,,,0
+F1,avg_wait_last_k1_customers,Recent delay history,kept,,,,3912
+F1,avg_wait_last_k2_customers,Recent delay history,dropped,collinear,avg_wait_last_k3_customers,"r = +0.961 with avg_wait_last_k3_customers, which tracks wait_min more closely",0
+F1,avg_wait_last_k3_customers,Recent delay history,kept,,,,3912
+F1,num_completed_today,Flow & throughput,dropped,collinear,arrival_hour,r = +0.982 with arrival_hour,0
+F1,num_completed_in_last_w1,Flow & throughput,kept,,,,0
+F1,num_completed_in_last_w2,Flow & throughput,kept,,,,0
+F1,num_completed_in_last_w3,Flow & throughput,kept,,,,0
+F1,num_customers_in_last_w1,Flow & throughput,kept,,,,0
+F1,num_customers_in_last_w2,Flow & throughput,kept,,,,0
+F1,num_customers_in_last_w3,Flow & throughput,kept,,,,0
+F1,avg_wait_last_w1,Recent delay history,kept,,,,4765
+F1,avg_wait_last_w2,Recent delay history,kept,,,,3492
+F1,avg_wait_last_w3,Recent delay history,kept,,,,1637
+F1,avg_delay_for_day,Recent delay history,kept,,,,1637
+F1,outpatient_waiting_count,Queue state (patients waiting),dropped,collinear,line_count0,"r = +0.996 with line_count0, which tracks wait_min more closely",0
+F1,males_waiting_count,Queue state (patients waiting),kept,,,,0
+F1,num_add_ons_today,Schedule context,kept,,,,0
+F1,num_add_ons_last_w2,Schedule context,kept,,,,0
+F1,num_scheduled_next_slot,Schedule context,kept,,,,0
+F1,num_scheduled_next_w2,Schedule context,dropped,collinear,sum_time_to_complete_next_w2,"r = +0.989 with sum_time_to_complete_next_w2, which tracks wait_min more closely",0
+F1,sum_time_to_complete_next_slot,Schedule context,dropped,collinear,num_scheduled_next_slot,"r = +0.975 with num_scheduled_next_slot, which tracks wait_min more closely",0
+F1,sum_time_to_complete_next_w2,Schedule context,kept,,,,0
+F1,with_contrast_count_waiting,Exam mix (waiting),dropped,constant,,always 0 at this site (not applicable here),0
+F1,with_and_without_contrast_count_waiting,Exam mix (waiting),dropped,constant,,always 0 at this site (not applicable here),0
+F1,with_contrast_count_in_progress,In-progress & capacity,dropped,constant,,always 0 at this site (not applicable here),0
+F1,with_and_without_contrast_count_in_progress,In-progress & capacity,dropped,constant,,always 0 at this site (not applicable here),0
+F1,early_arrival_min,Target & timestamps,kept,,,,0
+F1,arrival_hour,Calendar & time of day,kept,,,,0
+F1,day_of_week,Calendar & time of day,kept,,,,0
+F1,month,Calendar & time of day,dropped,collinear,day_of_year,"r = +0.996 with day_of_year, which tracks wait_min more closely",0
+F1,day_of_year,Calendar & time of day,kept,,,,0
+F2,sum_how_early_waiting,Queue state (patients waiting),kept,,,,0
+F2,avg_how_early_waiting,Queue state (patients waiting),kept,,,,2991
+F2,line_count0_strict,Queue state (patients waiting),kept,,,,0
+F2,sum_waits,Queue state (patients waiting),kept,,,,0
+F2,line_count0,Queue state (patients waiting),dropped,collinear,sum_wait_by_task_type_line,"r = +0.980 with sum_wait_by_task_type_line, which tracks wait_min more closely",0
+F2,line_count1,Queue state (patients waiting),kept,,,,0
+F2,line_count2,Queue state (patients waiting),kept,,,,0
+F2,line_count3,Queue state (patients waiting),kept,,,,0
+F2,line_count4,Queue state (patients waiting),kept,,,,0
+F2,flow_count2,Flow & throughput,kept,,,,0
+F2,flow_count4,Flow & throughput,kept,,,,0
+F2,sch_flow_count2,Flow & throughput,kept,,,,0
+F2,sch_flow_count4,Flow & throughput,kept,,,,0
+F2,fut_flow_count2,Flow & throughput,kept,,,,0
+F2,fut_flow_count4,Flow & throughput,kept,,,,0
+F2,delay_count,Recent delay history,kept,,,,0
+F2,delay_count_last_hour,Recent delay history,kept,,,,0
+F2,day_min_wait,Recent delay history,kept,,,,2636
+F2,day_max_wait,Recent delay history,kept,,,,2636
+F2,ahead_count,Queue state (patients waiting),kept,,,,0
+F2,thoracic_count,Exam mix (waiting),kept,,,,0
+F2,pediatric_count,Exam mix (waiting),kept,,,,0
+F2,neuro_count,Exam mix (waiting),kept,,,,0
+F2,abdominal_count,Exam mix (waiting),kept,,,,0
+F2,vascular_count,Exam mix (waiting),kept,,,,0
+F2,cardiac_count,Exam mix (waiting),kept,,,,0
+F2,msk_count,Exam mix (waiting),kept,,,,0
+F2,num_scanners_used_today,In-progress & capacity,kept,,,,0
+F2,sum_in_progress,In-progress & capacity,kept,,,,0
+F2,before_slot,Schedule context,kept,,,,0
+F2,after_slot,Schedule context,kept,,,,0
+F2,median5,Recent delay history,kept,,,,2594
+F2,most_recent1,Recent delay history,kept,,,,2594
+F2,most_recent2,Recent delay history,kept,,,,3411
+F2,most_recent3,Recent delay history,kept,,,,4190
+F2,most_recent4,Recent delay history,kept,,,,4895
+F2,most_recent5,Recent delay history,kept,,,,5609
+F2,start_hour,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F2,start_hour_sq,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F2,start_hour_cu,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F2,start_hour_4th,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F2,is_last,Schedule context,kept,,,,0
+F2,is_first,Schedule context,kept,,,,0
+F2,none_in_progress,In-progress & capacity,kept,,,,0
+F2,none_completed,Flow & throughput,kept,,,,0
+F2,none_in_line,Queue state (patients waiting),kept,,,,0
+F2,sum_wait_by_task_type_line,Queue state (patients waiting),kept,,,,0
+F2,avg_wait_by_task_type_line,Queue state (patients waiting),kept,,,,2991
+F2,sum_time_to_complete_in_progress,In-progress & capacity,kept,,,,0
+F2,delayed_in_line,Queue state (patients waiting),kept,,,,0
+F2,sum_delay_waiting_by_exam_code,Queue state (patients waiting),kept,,,,0
+F2,sum_delay_waiting_in_line,Queue state (patients waiting),kept,,,,0
+F2,sum_delay_in_progress,In-progress & capacity,kept,,,,0
+F2,expected_delay_next_exam,Recent delay history,kept,,,,0
+F2,avg_age_people_waiting,Queue state (patients waiting),kept,,,,0
+F2,in_progress_size,In-progress & capacity,kept,,,,0
+F2,avg_wait_last_k1_customers,Recent delay history,kept,,,,2594
+F2,avg_wait_last_k2_customers,Recent delay history,kept,,,,2594
+F2,avg_wait_last_k3_customers,Recent delay history,dropped,collinear,avg_wait_last_k2_customers,"r = +0.958 with avg_wait_last_k2_customers, which tracks wait_min more closely",0
+F2,num_completed_today,Flow & throughput,dropped,collinear,ahead_count,"r = +0.970 with ahead_count, which tracks wait_min more closely",0
+F2,num_completed_in_last_w1,Flow & throughput,kept,,,,0
+F2,num_completed_in_last_w2,Flow & throughput,kept,,,,0
+F2,num_completed_in_last_w3,Flow & throughput,kept,,,,0
+F2,num_customers_in_last_w1,Flow & throughput,kept,,,,0
+F2,num_customers_in_last_w2,Flow & throughput,kept,,,,0
+F2,num_customers_in_last_w3,Flow & throughput,kept,,,,0
+F2,avg_wait_last_w1,Recent delay history,kept,,,,5055
+F2,avg_wait_last_w2,Recent delay history,kept,,,,2122
+F2,avg_wait_last_w3,Recent delay history,kept,,,,1495
+F2,avg_delay_for_day,Recent delay history,kept,,,,1495
+F2,outpatient_waiting_count,Queue state (patients waiting),dropped,collinear,sum_wait_by_task_type_line,"r = +0.976 with sum_wait_by_task_type_line, which tracks wait_min more closely",0
+F2,males_waiting_count,Queue state (patients waiting),kept,,,,0
+F2,num_add_ons_today,Schedule context,kept,,,,0
+F2,num_add_ons_last_w2,Schedule context,kept,,,,0
+F2,num_scheduled_next_slot,Schedule context,kept,,,,0
+F2,num_scheduled_next_w2,Schedule context,dropped,collinear,sum_time_to_complete_next_w2,"r = +0.966 with sum_time_to_complete_next_w2, which tracks wait_min more closely",0
+F2,sum_time_to_complete_next_slot,Schedule context,kept,,,,0
+F2,sum_time_to_complete_next_w2,Schedule context,kept,,,,0
+F2,with_contrast_count_waiting,Exam mix (waiting),kept,,,,0
+F2,with_and_without_contrast_count_waiting,Exam mix (waiting),kept,,,,0
+F2,with_contrast_count_in_progress,In-progress & capacity,kept,,,,0
+F2,with_and_without_contrast_count_in_progress,In-progress & capacity,kept,,,,0
+F2,early_arrival_min,Target & timestamps,kept,,,,0
+F2,arrival_hour,Calendar & time of day,kept,,,,0
+F2,day_of_week,Calendar & time of day,kept,,,,0
+F2,month,Calendar & time of day,kept,,,,0
+F2,day_of_year,Calendar & time of day,dropped,collinear,month,"r = +0.996 with month, which tracks wait_min more closely",0
+F3,sum_how_early_waiting,Queue state (patients waiting),kept,,,,0
+F3,avg_how_early_waiting,Queue state (patients waiting),kept,,,,687
+F3,line_count0_strict,Queue state (patients waiting),kept,,,,0
+F3,sum_waits,Queue state (patients waiting),kept,,,,0
+F3,line_count0,Queue state (patients waiting),dropped,collinear,sum_delay_waiting_by_exam_code,"r = +0.983 with sum_delay_waiting_by_exam_code, which tracks wait_min more closely",0
+F3,line_count1,Queue state (patients waiting),kept,,,,0
+F3,line_count2,Queue state (patients waiting),kept,,,,0
+F3,line_count3,Queue state (patients waiting),kept,,,,0
+F3,line_count4,Queue state (patients waiting),kept,,,,0
+F3,flow_count2,Flow & throughput,kept,,,,0
+F3,flow_count4,Flow & throughput,kept,,,,0
+F3,sch_flow_count2,Flow & throughput,kept,,,,0
+F3,sch_flow_count4,Flow & throughput,kept,,,,0
+F3,fut_flow_count2,Flow & throughput,kept,,,,0
+F3,fut_flow_count4,Flow & throughput,kept,,,,0
+F3,delay_count,Recent delay history,kept,,,,0
+F3,delay_count_last_hour,Recent delay history,kept,,,,0
+F3,day_min_wait,Recent delay history,kept,,,,5127
+F3,day_max_wait,Recent delay history,kept,,,,5127
+F3,ahead_count,Queue state (patients waiting),kept,,,,0
+F3,thoracic_count,Exam mix (waiting),kept,,,,0
+F3,pediatric_count,Exam mix (waiting),kept,,,,0
+F3,neuro_count,Exam mix (waiting),kept,,,,0
+F3,abdominal_count,Exam mix (waiting),kept,,,,0
+F3,vascular_count,Exam mix (waiting),kept,,,,0
+F3,cardiac_count,Exam mix (waiting),kept,,,,0
+F3,msk_count,Exam mix (waiting),kept,,,,0
+F3,num_scanners_used_today,In-progress & capacity,kept,,,,0
+F3,sum_in_progress,In-progress & capacity,kept,,,,0
+F3,before_slot,Schedule context,kept,,,,0
+F3,after_slot,Schedule context,kept,,,,0
+F3,median5,Recent delay history,kept,,,,3273
+F3,most_recent1,Recent delay history,kept,,,,3273
+F3,most_recent2,Recent delay history,kept,,,,4040
+F3,most_recent3,Recent delay history,kept,,,,4692
+F3,most_recent4,Recent delay history,kept,,,,5285
+F3,most_recent5,Recent delay history,kept,,,,5854
+F3,start_hour,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F3,start_hour_sq,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F3,start_hour_cu,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F3,start_hour_4th,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F3,is_last,Schedule context,kept,,,,0
+F3,is_first,Schedule context,kept,,,,0
+F3,none_in_progress,In-progress & capacity,kept,,,,0
+F3,none_completed,Flow & throughput,kept,,,,0
+F3,none_in_line,Queue state (patients waiting),kept,,,,0
+F3,sum_wait_by_task_type_line,Queue state (patients waiting),dropped,collinear,sum_delay_waiting_by_exam_code,"r = +0.969 with sum_delay_waiting_by_exam_code, which tracks wait_min more closely",0
+F3,avg_wait_by_task_type_line,Queue state (patients waiting),kept,,,,687
+F3,sum_time_to_complete_in_progress,In-progress & capacity,dropped,collinear,sum_in_progress,"r = +0.974 with sum_in_progress, which tracks wait_min more closely",0
+F3,delayed_in_line,Queue state (patients waiting),kept,,,,0
+F3,sum_delay_waiting_by_exam_code,Queue state (patients waiting),kept,,,,0
+F3,sum_delay_waiting_in_line,Queue state (patients waiting),kept,,,,0
+F3,sum_delay_in_progress,In-progress & capacity,kept,,,,0
+F3,expected_delay_next_exam,Recent delay history,kept,,,,0
+F3,avg_age_people_waiting,Queue state (patients waiting),kept,,,,0
+F3,in_progress_size,In-progress & capacity,kept,,,,0
+F3,avg_wait_last_k1_customers,Recent delay history,kept,,,,3273
+F3,avg_wait_last_k2_customers,Recent delay history,kept,,,,0
+F3,avg_wait_last_k3_customers,Recent delay history,kept,,,,0
+F3,num_completed_today,Flow & throughput,dropped,collinear,arrival_hour,r = +0.976 with arrival_hour,0
+F3,num_completed_in_last_w1,Flow & throughput,kept,,,,0
+F3,num_completed_in_last_w2,Flow & throughput,kept,,,,0
+F3,num_completed_in_last_w3,Flow & throughput,kept,,,,0
+F3,num_customers_in_last_w1,Flow & throughput,kept,,,,0
+F3,num_customers_in_last_w2,Flow & throughput,kept,,,,0
+F3,num_customers_in_last_w3,Flow & throughput,kept,,,,0
+F3,avg_wait_last_w1,Recent delay history,kept,,,,3042
+F3,avg_wait_last_w2,Recent delay history,kept,,,,2651
+F3,avg_wait_last_w3,Recent delay history,kept,,,,2643
+F3,avg_delay_for_day,Recent delay history,kept,,,,2643
+F3,outpatient_waiting_count,Queue state (patients waiting),dropped,collinear,sum_delay_waiting_by_exam_code,"r = +0.983 with sum_delay_waiting_by_exam_code, which tracks wait_min more closely",0
+F3,males_waiting_count,Queue state (patients waiting),kept,,,,0
+F3,num_add_ons_today,Schedule context,kept,,,,0
+F3,num_add_ons_last_w2,Schedule context,kept,,,,0
+F3,num_scheduled_next_slot,Schedule context,kept,,,,0
+F3,num_scheduled_next_w2,Schedule context,kept,,,,0
+F3,sum_time_to_complete_next_slot,Schedule context,kept,,,,0
+F3,sum_time_to_complete_next_w2,Schedule context,dropped,collinear,num_scheduled_next_w2,"r = +0.978 with num_scheduled_next_w2, which tracks wait_min more closely",0
+F3,with_contrast_count_waiting,Exam mix (waiting),kept,,,,0
+F3,with_and_without_contrast_count_waiting,Exam mix (waiting),kept,,,,0
+F3,with_contrast_count_in_progress,In-progress & capacity,kept,,,,0
+F3,with_and_without_contrast_count_in_progress,In-progress & capacity,kept,,,,0
+F3,early_arrival_min,Target & timestamps,kept,,,,0
+F3,arrival_hour,Calendar & time of day,kept,,,,0
+F3,day_of_week,Calendar & time of day,kept,,,,0
+F3,month,Calendar & time of day,kept,,,,0
+F3,day_of_year,Calendar & time of day,dropped,collinear,month,"r = +0.997 with month, which tracks wait_min more closely",0
+F4,sum_waits,Queue state (patients waiting),kept,,,,0
+F4,line_count0,Queue state (patients waiting),dropped,collinear,sum_delay_waiting_by_exam_code,"r = +0.998 with sum_delay_waiting_by_exam_code, which tracks wait_min more closely",0
+F4,line_count1,Queue state (patients waiting),kept,,,,0
+F4,line_count2,Queue state (patients waiting),kept,,,,0
+F4,line_count3,Queue state (patients waiting),kept,,,,0
+F4,line_count4,Queue state (patients waiting),kept,,,,0
+F4,flow_count2,Flow & throughput,kept,,,,0
+F4,flow_count4,Flow & throughput,kept,,,,0
+F4,day_min_wait,Recent delay history,kept,,,,0
+F4,day_max_wait,Recent delay history,kept,,,,5919
+F4,ahead_count,Queue state (patients waiting),kept,,,,0
+F4,thoracic_count,Exam mix (waiting),kept,,,,0
+F4,pediatric_count,Exam mix (waiting),kept,,,,0
+F4,msk_count,Exam mix (waiting),kept,,,,0
+F4,num_scanners_used_today,In-progress & capacity,kept,,,,0
+F4,sum_in_progress,In-progress & capacity,kept,,,,0
+F4,before_slot,Schedule context,kept,,,,0
+F4,median5,Recent delay history,kept,,,,1391
+F4,most_recent1,Recent delay history,kept,,,,1391
+F4,most_recent2,Recent delay history,kept,,,,0
+F4,most_recent3,Recent delay history,kept,,,,0
+F4,most_recent4,Recent delay history,kept,,,,0
+F4,most_recent5,Recent delay history,kept,,,,3583
+F4,start_hour,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F4,start_hour_sq,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F4,start_hour_cu,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F4,start_hour_4th,Calendar & time of day,dropped,function,arrival_hour,monotone function of arrival_hour (Spearman 1.0000),0
+F4,is_last,Schedule context,kept,,,,0
+F4,is_first,Schedule context,kept,,,,0
+F4,none_in_progress,In-progress & capacity,kept,,,,0
+F4,none_completed,Flow & throughput,kept,,,,0
+F4,none_in_line,Queue state (patients waiting),kept,,,,0
+F4,sum_time_to_complete_in_progress,In-progress & capacity,kept,,,,0
+F4,sum_delay_waiting_by_exam_code,Queue state (patients waiting),kept,,,,0
+F4,sum_delay_waiting_in_line,Queue state (patients waiting),kept,,,,0
+F4,sum_delay_in_progress,In-progress & capacity,kept,,,,0
+F4,avg_age_people_waiting,Queue state (patients waiting),kept,,,,0
+F4,in_progress_size,In-progress & capacity,kept,,,,0
+F4,avg_wait_last_k1_customers,Recent delay history,kept,,,,1391
+F4,avg_wait_last_k2_customers,Recent delay history,kept,,,,0
+F4,avg_wait_last_k3_customers,Recent delay history,kept,,,,0
+F4,num_completed_today,Flow & throughput,dropped,collinear,ahead_count,"r = +0.996 with ahead_count, which tracks wait_min more closely",0
+F4,num_completed_in_last_w1,Flow & throughput,kept,,,,0
+F4,num_completed_in_last_w2,Flow & throughput,dropped,collinear,flow_count4,"r = +0.958 with flow_count4, which tracks wait_min more closely",0
+F4,num_completed_in_last_w3,Flow & throughput,dropped,collinear,num_customers_in_last_w3,"r = +0.950 with num_customers_in_last_w3, which tracks wait_min more closely",0
+F4,num_customers_in_last_w1,Flow & throughput,kept,,,,0
+F4,num_customers_in_last_w2,Flow & throughput,kept,,,,0
+F4,num_customers_in_last_w3,Flow & throughput,kept,,,,0
+F4,avg_wait_last_w1,Recent delay history,kept,,,,1335
+F4,avg_wait_last_w2,Recent delay history,kept,,,,904
+F4,avg_wait_last_w3,Recent delay history,kept,,,,819
+F4,avg_delay_for_day,Recent delay history,kept,,,,819
+F4,outpatient_waiting_count,Queue state (patients waiting),dropped,collinear,sum_delay_waiting_by_exam_code,"r = +0.995 with sum_delay_waiting_by_exam_code, which tracks wait_min more closely",0
+F4,males_waiting_count,Queue state (patients waiting),kept,,,,0
+F4,early_arrival_min,Target & timestamps,kept,,,,0
+F4,arrival_hour,Calendar & time of day,kept,,,,0
+F4,day_of_week,Calendar & time of day,kept,,,,0
+F4,month,Calendar & time of day,dropped,collinear,day_of_year,"r = +0.997 with day_of_year, which tracks wait_min more closely",0
+F4,day_of_year,Calendar & time of day,kept,,,,0

@@ -76,6 +76,8 @@
       b.onclick = () => { state[it.name] = state[it.name] === false; b.setAttribute("aria-pressed", state[it.name] !== false); redraw(); };
       el.appendChild(b);
     });
+    const prev = host.nextElementSibling;
+    if (prev && prev.classList.contains("legend")) prev.remove();     // charts are redrawn when their controls change
     host.parentNode.insertBefore(el, host.nextSibling);
     return el;
   }

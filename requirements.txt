@@ -1,3 +1,9 @@
 pandas>=2.2
 numpy>=1.26
 openpyxl>=3.1
+scipy>=1.13
+scikit-learn>=1.5
+scikit-image>=0.24      # SIFT, RANSAC, restoration, segmentation
+pillow>=10              # PNG / JPEG / JPEG 2000 codecs
+torch>=2.2              # CNN in T5 (CPU is enough, ~2.5 min)
+matplotlib>=3.8         # only used at build time to export colormap tables (T6)

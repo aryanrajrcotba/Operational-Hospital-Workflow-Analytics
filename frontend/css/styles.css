@@ -88,7 +88,7 @@ section.block { margin-top: 44px; }
 .sec-head .no { color: var(--accent-ink); font-weight: 600; font-size: 13px; letter-spacing: .04em; }
 .sec-head h2 { font-size: 21px; letter-spacing: -.01em; }
 .lede { color: var(--ink-2); max-width: 78ch; margin-bottom: 16px; }
-.grid { display: grid; gap: 14px; }
+.grid { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
 .g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -171,14 +171,29 @@ td.mono, .mono { font: 12.5px ui-monospace, SFMono-Regular, Menlo, monospace; }
 .soon { border: 1.5px dashed var(--axis); background: none; box-shadow: none; }
 .footer { margin-top: 60px; color: var(--muted); font-size: 12.5px; }
 
+/* ---- figures, imaging topics ---- */
+.fig { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); min-width: 0; }
+.fig img { display: block; width: 100%; height: auto; background: #000; }
+.fig figcaption { padding: 8px 12px 10px; font-size: 13px; }
+.fig figcaption b { display: block; font-weight: 600; }
+.fig figcaption span { display: block; color: var(--muted); font-size: 12.5px; margin-top: 1px; }
+.tile .v small { font-weight: 400; }
+input[type="range"] { accent-color: var(--accent); }
+input[type="checkbox"] { accent-color: var(--accent); }
+
 @media (max-width: 900px) {
-  .hero, .g2, .g3 { grid-template-columns: 1fr; }
+  .grid[style*="grid-template-columns"], .steps { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  #mont { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  #vw-panes { grid-template-columns: minmax(0, 1fr) !important; }
+  .hero, .g2, .g3 { grid-template-columns: minmax(0, 1fr); }
   .tiles, .g4, .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .step:not(:last-child)::after { display: none; }
   .hero-fig { font-size: 44px; }
 }
 @media (max-width: 520px) {
-  .tiles, .g4, .steps { grid-template-columns: 1fr; }
+  .grid[style*="grid-template-columns"], .steps { grid-template-columns: minmax(0, 1fr) !important; }
+  #mont { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .tiles, .g4, .steps { grid-template-columns: minmax(0, 1fr); }
   .hero h1 { font-size: 24px; }
   input[type="search"] { min-width: 0; width: 100%; }
 }

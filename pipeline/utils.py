@@ -29,3 +29,12 @@ def to_js(path, var, obj):
 
 def r(x, n=2):
     return None if x is None or (isinstance(x, float) and np.isnan(x)) else round(float(x), n)
+
+
+def to_js_key(path, key, obj):
+    """Write `window.DATA.<key> = {...};` (topic files loaded after data.js)."""
+    tmp = path.with_suffix(".tmp")
+    to_js(tmp, "_", obj)
+    body = tmp.read_text()[len("window._ = "):]
+    tmp.unlink()
+    path.write_text(f"window.DATA = window.DATA || {{}};\nwindow.DATA.{key} = " + body)

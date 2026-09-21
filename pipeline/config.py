@@ -7,6 +7,7 @@ RAW_XLSX = ROOT / "WaitData.Published.xlsx"
 INTERIM = ROOT / "data" / "interim"
 PROCESSED = ROOT / "data" / "processed"
 FRONTEND_DATA = ROOT / "frontend" / "data"
+FRONTEND_ASSETS = ROOT / "frontend" / "assets"
 
 FACILITIES = ["F1", "F2", "F3", "F4"]
 
