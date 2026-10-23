@@ -322,13 +322,20 @@
       ["T3 · EHR preprocessing", "Redundant columns and records, explicit and hidden missing data, imputation benchmark."],
       ["T4 · Image processing", "Enhancement, restoration, segmentation and compression, scored against ground truth."],
       ["T5 · Image analysis", "SIFT keypoints, RANSAC registration and a CNN nodule classifier."],
-      ["T6 · Visualisation", "Interactive multi-planar viewer: windowing, colormaps, overlays, projections."]];
-    return `<div class="hero"><div><h1>Coming next</h1><p>Topics are added one at a time. Each new topic is one Python module in <span class="mono">pipeline/</span> plus one view in this app, so nothing built so far needs to change.</p></div></div>
+      ["T6 · Visualisation", "Interactive multi-planar viewer: windowing, colormaps, overlays, projections."],
+      ["T7 · Staffing", "Hourly demand forecasts turned into rosters, and a per-patient long-wait risk score."],
+      ["T8 · Strategy: demand", "Utilisation by weekday and hour, load-to-delay curve, backtested 12-month outlook."],
+      ["T9 · Strategy: scenarios", "What-if grid of demand growth × staffed rooms; headroom, deadline, rooms needed."],
+      ["T10 · Text classification", "Exam type and abnormal/normal from report text; unsupervised clusters."],
+      ["T11 · Entity extraction", "Anatomy, finding and size spans; present / negated / uncertain."],
+      ["T12 · Ranking & WSD", "Report search with BM25 and negation, keyword ranking, ambiguous abbreviations."],
+      ["T13 · Dimensionality reduction", "PCA, kernel PCA, Isomap, t-SNE: which map keeps neighbours and wait signal."],
+      ["T14 · Weight: explore", "Behaviours and BMI: crude vs adjusted effects, confounding, shapes, interactions."],
+      ["T15 · Weight: model", "Models of rising complexity audited against the known mechanism."]];
+    return `<div class="hero"><div><h1>Project complete</h1><p>All fifteen topics (T1–T15) are done. Each is one Python module in <span class="mono">pipeline/</span> plus one view in this app.</p></div></div>
     <div class="grid g3">
       ${done.map(([h, p]) => `<div class="card"><div class="tag" style="color:var(--good-ink);font-weight:600;font-size:12px">DONE</div><h3 style="margin-top:4px">${h}</h3><p class="sub">${p}</p></div>`).join("")}
-      <div class="card soon"><div class="tag" style="color:var(--muted);font-weight:600;font-size:12px">PLANNED</div><h3 style="margin-top:4px">T7 · Your next topic</h3><p class="sub">Send the topic name and it slots in here.</p></div>
-    </div>
-    <div class="callout"><p><b>Ideas that fit the data</b> (only if you want them): wait-time prediction with a time-based split, queue and capacity analysis by scanner load, bottleneck detection by hour and exam type, and running the T4–T5 methods on real DICOM studies instead of the phantom.</p></div>`;
+    </div>`;
   }
 
   // ================================================================ shell
@@ -336,9 +343,9 @@
   const TOPICS = [
     { id: "t1", label: "T1 · Understanding EHR", view: viewT1, mount: mountT1 },
     { id: "t2", label: "T2 · Preprocessing", view: viewT2, mount: mountT2 },
-    { id: "next", label: "Coming next", view: viewNext, mount() {} },
+    { id: "next", label: "Summary", view: viewNext, mount() {} },
   ];
-  window.App = { add(t) { TOPICS.splice(TOPICS.length - 1, 0, t); }, start() { boot(); } };
+  window.App = { add(t) { TOPICS.splice(TOPICS.length - 1, 0, t); }, addFirst(t) { TOPICS.unshift(t); }, go(id) { current = id; history.replaceState(null, "", "#" + id); render(); scrollTo(0, 0); }, start() { boot(); } };
   let current = "t1";
 
   function render() {
@@ -347,6 +354,7 @@
     $id("tabs").querySelectorAll(".tab").forEach((b) => (b.onclick = () => { current = b.dataset.id; history.replaceState(null, "", "#" + current); render(); scrollTo(0, 0); }));
     $id("main").innerHTML = t.view() + `<div class="footer">Source: ${D.meta.source} · generated ${D.meta.generated} · all figures computed by <span class="mono">pipeline/build.py</span></div>`;
     t.mount(); wireTables($id("main"));
+    const sel = $id("tabs").querySelector('[aria-selected="true"]'); if (sel) $id("tabs").scrollLeft = Math.max(0, sel.offsetLeft - 40);
   }
   const themeBtn = $id("theme");
   try { const s = localStorage.getItem("theme"); if (s) document.documentElement.dataset.theme = s; } catch (e) {}
@@ -357,8 +365,8 @@
     render();
   };
   function boot() {
-    current = (location.hash || "#t1").slice(1);
-    if (!TOPICS.some((t) => t.id === current)) current = "t1";
+    current = (location.hash || "#home").slice(1);
+    if (!TOPICS.some((t) => t.id === current)) current = TOPICS[0].id;
     render();
   }
 })();

@@ -169,7 +169,7 @@
       o.items.forEach((it, i) => {
         const y = m.t + i * rowH, bh = 16, by = y + (rowH - bh) / 2;
         const lab = $("text", { x: m.l - 10, y: y + rowH / 2 + 4, "text-anchor": "end", class: "ttl" }, svg);
-        lab.textContent = it.label.length > 30 ? it.label.slice(0, 29) + "…" : it.label;
+        const mx = Math.max(30, Math.floor((o.labelW || 190) / 6.2)); lab.textContent = it.label.length > mx ? it.label.slice(0, mx - 1) + "…" : it.label;
         const parts = it.parts || [{ value: it.value, color: it.color || o.color || "var(--accent)", name: "" }];
         let acc = 0;
         parts.forEach((p, k) => {

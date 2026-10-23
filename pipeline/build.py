@@ -1,7 +1,11 @@
-"""Run the whole pipeline:  python -m pipeline.build [--only workbook|imaging]
+"""Run the whole pipeline:  python -m pipeline.build [--only workbook|imaging|ops|text|weight]
 
 workbook (T1-T3): reads WaitData.Published.xlsx -> data/processed/*.csv.gz and frontend/data/data.js, data_t3.js
 imaging  (T4-T6): needs no workbook; generates the synthetic CT phantom -> frontend/assets/, data_t4..t6.js, t6_volume.js
+ops      (T7-T9, T13): reads data/processed/F*_clean.csv.gz (written by `workbook`) -> data_t7.js, data_t8.js, data_t9.js, data_t13.js
+text     (T10-T12): needs no workbook; generates synthetic radiology reports -> data_t10.js .. data_t12.js
+home     (Home tab): small models exported for the in-browser tools -> data_home.js (run after text/weight not required)
+weight   (T14-T15): needs no workbook; generates synthetic adult lifestyle data -> data_t14.js, data_t15.js
 """
 import argparse
 import time
@@ -40,15 +44,52 @@ def imaging():
     to_js_key(FRONTEND_DATA / "data_t6.js", "t6", t6_visualisation.run())
 
 
+def ops():
+    from . import t7_staffing, t8_strategy_demand, t9_strategy_scenarios, t13_dimensionality_reduction
+
+    FRONTEND_DATA.mkdir(parents=True, exist_ok=True)
+    to_js_key(FRONTEND_DATA / "data_t7.js", "t7", t7_staffing.run())
+    t8 = t8_strategy_demand.run()
+    to_js_key(FRONTEND_DATA / "data_t8.js", "t8", t8)
+    to_js_key(FRONTEND_DATA / "data_t9.js", "t9", t9_strategy_scenarios.run(t8))
+    to_js_key(FRONTEND_DATA / "data_t13.js", "t13", t13_dimensionality_reduction.run())
+
+
+def text():
+    from . import t10_text_classification, t11_information_extraction, t12_ranking_wsd
+
+    FRONTEND_DATA.mkdir(parents=True, exist_ok=True)
+    to_js_key(FRONTEND_DATA / "data_t10.js", "t10", t10_text_classification.run())
+    to_js_key(FRONTEND_DATA / "data_t11.js", "t11", t11_information_extraction.run())
+    to_js_key(FRONTEND_DATA / "data_t12.js", "t12", t12_ranking_wsd.run())
+
+
+def weight():
+    from . import t14_weight_behaviour_explore, t15_weight_behaviour_models
+
+    FRONTEND_DATA.mkdir(parents=True, exist_ok=True)
+    to_js_key(FRONTEND_DATA / "data_t14.js", "t14", t14_weight_behaviour_explore.run())
+    to_js_key(FRONTEND_DATA / "data_t15.js", "t15", t15_weight_behaviour_models.run())
+
+
+def home():
+    from . import home as home_mod
+
+    FRONTEND_DATA.mkdir(parents=True, exist_ok=True)
+    to_js_key(FRONTEND_DATA / "data_home.js", "home", home_mod.run())
+
+
+GROUPS = {"workbook": workbook, "imaging": imaging, "ops": ops, "text": text, "weight": weight, "home": home}
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--only", choices=["workbook", "imaging"], help="run just T1-T3 or just T4-T6 (default: both)")
+    ap.add_argument("--only", choices=list(GROUPS), help="run one group of topics (default: all, in this order)")
     args = ap.parse_args()
     t0 = time.time()
-    if args.only != "imaging":
-        workbook()
-    if args.only != "workbook":
-        imaging()
+    for name, fn in GROUPS.items():
+        if args.only in (None, name):
+            fn()
     print(f"Done in {time.time() - t0:.0f}s -> data/processed/, frontend/data/, frontend/assets/")
 
 

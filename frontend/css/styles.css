@@ -63,8 +63,8 @@ button { font: inherit; color: inherit; }
 .topbar-in { max-width: 1120px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .brand { font-weight: 600; font-size: 15px; letter-spacing: -.01em; margin-right: auto; }
 .brand small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
-.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
-.tab { border: 0; background: none; padding: 7px 12px; border-radius: 8px; cursor: pointer; color: var(--ink-2); font-weight: 500; font-size: 14px; }
+.tabs { display: flex; gap: 4px; flex-wrap: nowrap; overflow-x: auto; order: 3; flex: 1 1 100%; scrollbar-width: thin; padding-bottom: 2px; }
+.tab { flex: none; white-space: nowrap; border: 0; background: none; padding: 7px 12px; border-radius: 8px; cursor: pointer; color: var(--ink-2); font-weight: 500; font-size: 14px; }
 .tab:hover { background: var(--surface-2); }
 .tab[aria-selected="true"] { background: var(--ink); color: var(--page); }
 .iconbtn { border: 1px solid var(--border); background: var(--surface); border-radius: 8px; width: 34px; height: 34px; cursor: pointer; display: grid; place-items: center; }
@@ -201,3 +201,12 @@ input[type="checkbox"] { accent-color: var(--accent); }
   .topbar { position: static; }
   html { scroll-padding-top: 12px; }
 }
+
+/* ---- T10+ : annotated text, highlight marks, small stat rows ---- */
+mark.ent { padding: 1px 4px; border-radius: 4px; color: var(--ink); background: color-mix(in srgb, var(--c) 22%, transparent); box-shadow: inset 0 -2px 0 var(--c); }
+mark.ent sup { font-size: 10px; font-weight: 600; margin-left: 3px; color: var(--ink-2); text-transform: uppercase; letter-spacing: .03em; }
+mark.ent.ANATOMY { --c: var(--s1); } mark.ent.FINDING { --c: var(--s2); } mark.ent.SIZE { --c: var(--s3); }
+.annot { font-size: 14px; line-height: 2; }
+.statrow { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+.statrow .card .big { font-size: 28px; font-weight: 600; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.pre { white-space: pre-wrap; font-size: 13.5px; }

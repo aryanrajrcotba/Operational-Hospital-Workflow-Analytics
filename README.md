@@ -4,13 +4,22 @@ Wait-time analytics on `WaitData.Published.xlsx` (imaging exams at four faciliti
 
 | Topic | Status | Where |
 |---|---|---|
+| Home · clinical & operations workspace (3 working tools) | done | `pipeline/home.py` + `frontend/js/home.js` → first tab **Home** |
 | T1 · Understanding EHR | done | `pipeline/t1_understanding.py` → frontend tab **T1** |
 | T2 · Preprocessing: standardization, data cleaning | done | `pipeline/t2_preprocessing.py` → frontend tab **T2** |
 | T3 · Preprocessing of EHR data: redundant data removal, missing data | done | `pipeline/t3_ehr_preprocessing.py` → frontend tab **T3** |
 | T4 · Biomedical image processing: enhancement, restoration, segmentation, compression | done | `pipeline/t4_image_processing.py` → frontend tab **T4** |
 | T5 · Biomedical image analysis: SIFT, RANSAC, CNN | done | `pipeline/t5_image_analysis.py` → frontend tab **T5** |
 | T6 · Biomedical image visualisation | done | `pipeline/t6_visualisation.py` → frontend tab **T6** (interactive viewer) |
-| T7+ | to be added | |
+| T7 · Patient prediction for improved staffing | done | `pipeline/t7_staffing.py` → tab **T7** |
+| T8 · Informed strategic planning, part 1 | done | `pipeline/t8_strategy_demand.py` → tab **T8** |
+| T9 · Informed strategic planning, part 2 | done | `pipeline/t9_strategy_scenarios.py` → tab **T9** |
+| T10 · Classification and clustering of clinical text | done | `pipeline/t10_text_classification.py` → tab **T10** |
+| T11 · Information extraction and entity recognition | done | `pipeline/t11_information_extraction.py` → tab **T11** |
+| T12 · Ranking and word-sense disambiguation | done | `pipeline/t12_ranking_wsd.py` → tab **T12** |
+| T13 · Dimensionality reduction for exploratory analysis | done | `pipeline/t13_dimensionality_reduction.py` → tab **T13** |
+| T14 · Behavioural factors behind weight in adults, part 1 | done | `pipeline/t14_weight_behaviour_explore.py` → tab **T14** |
+| T15 · Behavioural factors behind weight in adults, part 2 | done | `pipeline/t15_weight_behaviour_models.py` → tab **T15** |
 
 ## Run
 
@@ -19,6 +28,10 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python -m pipeline.build                    # everything, ~4 min (first run also reads the 54 MB workbook, ~40 s more)
 .venv/bin/python -m pipeline.build --only workbook    # T1-T3 only, ~1 min
 .venv/bin/python -m pipeline.build --only imaging     # T4-T6 only, ~3 min, needs no workbook
+.venv/bin/python -m pipeline.build --only ops         # T7-T9 + T13, ~2 min, needs data/processed/ from the workbook step
+.venv/bin/python -m pipeline.build --only text        # T10-T12, ~2.5 min, synthetic reports, needs no workbook
+.venv/bin/python -m pipeline.build --only weight      # T14-T15, ~1 min, simulated survey, needs no workbook
+.venv/bin/python -m pipeline.build --only home        # Home tab models (report reader, lifestyle what-if), seconds
 open frontend/index.html                              # works from file://, no server needed
 ```
 
@@ -49,9 +62,24 @@ The workbook contains **no images**, so T4–T6 run on a generated chest-CT phan
 * **T5** registers a re-scan with a known rotation/scale/shift using SIFT + RANSAC (error measured at the nodules; least squares vs RANSAC as wrong matches are added), and trains a 6k-parameter CNN (BatchNorm, soft-max pooling) on nodule/non-nodule patches from separate phantom patients, compared with logistic regression and a centre-surround rule, plus a sliding-window detector. Train and test patients come from the same generator, so the CNN's accuracy is in-distribution.
 * **T6** is an interactive multi-planar viewer (window/level, colormaps, MIP/MinIP/average slabs, overlays, montage) and a measured comparison of colormaps (CIELAB lightness).
 
+## T7–T9: staffing and strategy (real data, one assumed input)
+
+* **Exam duration is not in the workbook.** T7 and T9 assume 30 min per exam and a staffing target of mean queue wait ≤ 10 min (M/M/c queue, `pipeline/ops.py`); each page shows how the answer moves for 20–60 min. "Installed scanners" is the largest `num_scanners_used_today` ever seen at a site, so utilisation above 100 % (F3, F4) means the assumed duration or scanner count does not fit, and only the *pattern* across hours is meaningful.
+* **T7** forecasts hourly arrivals (lags look backwards only; chronological 70/30 split) and a per-patient long-wait risk; boosting does not clearly beat a weekday-by-hour average on hourly counts, which the page reports as is. **T8** backtests a linear 12-month trend on the last 5 months before showing it. **T9** is model-based: its waits are queue predictions, not observed outcomes.
+
+## T10–T15: text and behaviour (synthetic data)
+
+The workbook has no free text and no body-weight data, so, like the CT phantom, these topics run on **generated data with a known truth** and say so on every page.
+
+* **T10–T12** use template-generated radiology reports (`pipeline/clinical_text.py`): exam category, abnormal/normal, gold entity spans, and present/negated/uncertain assertions are known. Typos, abbreviations, incidental cross-category findings and rule-evading phrasings (“free of”, “not seen”) are included on purpose. Real reports are messier, so absolute scores are optimistic; the comparisons (n-grams, negation handling, incomplete lexicons, BM25 vs TF-IDF, context vs gloss for word senses) are the point.
+* **T13** is on the real cleaned data (2,500 exams per site) and scores maps by trustworthiness/continuity and by how much wait signal they keep.
+* **T14–T15** use a simulated adult survey (`pipeline/behaviour_data.py`) whose BMI formula is known (U-shaped sleep effect, a food × exercise interaction, a mediated stress path, confounded and pure-noise variables), so T15 can check models against the truth. Effect sizes are invented; nothing here is a finding about people.
+* To use real text or survey data, replace `make_reports` / `make_wsd` / `make_data` with loaders that return the same fields.
+
 ## Assumptions
 
 * "HER" was read as **EHR** (electronic health record).
+* T9's "rooms" are staffed scanner rooms under the assumed exam duration, not a statement about the hospital's real equipment.
 * The workbook does not name its source system or the imaging modality, so the app says "scanner-based imaging exams".
 * No synthetic data was needed; the real data already has enough standardization and quality issues to demonstrate T2.
 
